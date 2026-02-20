@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>OpenDrop — Instant Browser File Sharing</title>
+    <link rel="stylesheet" href="style.css" />
+  </head>
+  <body>
+    <header class="header">
+      <div class="header-inner">
+        <h1 class="title">OpenDrop</h1>
+        <p class="subtitle">Instant browser-to-browser file sharing with WebRTC</p>
+      </div>
+    </header>
+
+    <main class="main">
+      <section class="card connection-card">
+        <h2>Connection</h2>
+        <p class="description">
+          Create a room and share the 6-digit code, or join an existing room to start a direct
+          peer-to-peer connection.
+        </p>
+
+        <div class="username-section">
+          <label for="userNameInput" class="input-label">Your Name:</label>
+          <input
+            id="userNameInput"
+            type="text"
+            maxlength="20"
+            placeholder="Enter your name"
+            class="input"
+            autocomplete="off"
+          />
+        </div>
+
+        <div class="connection-actions">
+          <button id="createRoomBtn" class="btn primary">Create Room</button>
+
+          <div class="join-group">
+            <input
+              id="roomCodeInput"
+              type="text"
+              maxlength="6"
+              placeholder="Enter 6-digit code"
+              class="input"
+              autocomplete="off"
+            />
+            <button id="joinRoomBtn" class="btn secondary">Join Room</button>
+          </div>
+        </div>
+
+        <div class="status-row">
+          <span class="status-label">Status:</span>
+          <span id="connectionStatus" class="status-pill disconnected">Disconnected</span>
+        </div>
+
+        <div id="roomInfo" class="room-info hidden">
+          <div class="room-code-section">
+            <span class="room-label">Room Code:</span>
+            <span id="roomCodeDisplay" class="room-code"></span>
+          </div>
+          <div id="qrCodeContainer" class="qr-code-container hidden">
+            <p class="qr-label">Scan to join:</p>
+            <div id="qrCodeTarget"></div>
+            <button id="copyLinkBtn" class="btn text small">Copy Link</button>
+          </div>
+        </div>
+
+        <div id="usersList" class="users-list hidden">
+          <h3 class="users-list-title">Connected Users</h3>
+          <ul id="usersListItems" class="users-list-items"></ul>
+        </div>
+
+        <div id="logArea" class="log-area" aria-live="polite"></div>
+      </section>
+
+      <section id="transferPanel" class="card transfer-card hidden" aria-hidden="true">
+        <h2>File Transfer</h2>
+
+        <div class="file-row">
+          <input id="fileInput" type="file" class="file-input" />
+          <select id="peerSelect" class="input peer-select" disabled>
+            <option value="">Select a peer...</option>
+          </select>
+          <button id="sendFileBtn" class="btn primary" disabled>Send File</button>
+        </div>
+
+        <div class="progress-container">
+          <div class="progress-header">
+            <span id="progressLabel">No active transfer</span>
+            <button id="cancelTransferBtn" class="btn text small" disabled>Cancel</button>
+          </div>
+          <div class="progress-bar-outer">
+            <div id="progressBar" class="progress-bar-inner"></div>
+          </div>
+          <div class="progress-meta">
+            <span id="progressPercent">0%</span>
+            <span id="transferSpeed">0 KB/s</span>
+          </div>
+        </div>
+      </section>
+    </main>
+
+    <div id="modalBackdrop" class="modal-backdrop hidden" aria-hidden="true">
+      <div class="modal">
+        <h3>Incoming File</h3>
+        <p id="incomingFileName" class="modal-filename"></p>
+        <p id="incomingFileSize" class="modal-filesize"></p>
+        <div class="modal-actions">
+          <button id="acceptFileBtn" class="btn primary">Accept</button>
+          <button id="rejectFileBtn" class="btn secondary">Reject</button>
+        </div>
+      </div>
+    </div>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js"></script>
+    <script src="app.js"></script>
+  </body>
+</html>

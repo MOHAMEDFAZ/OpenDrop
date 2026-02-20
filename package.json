@@ -1,0 +1,22 @@
+{
+  "name": "opendrop",
+  "version": "1.0.0",
+  "description": "OpenDrop — WebRTC-based AirDrop-style file sharing between browsers",
+  "main": "server.js",
+  "scripts": {
+    "start": "node server.js"
+  },
+  "keywords": [
+    "webrtc",
+    "p2p",
+    "file-transfer",
+    "airdrop",
+    "browser"
+  ],
+  "author": "",
+  "license": "MIT",
+  "dependencies": {
+    "express": "^4.22.1",
+    "ws": "^8.19.0"
+  }
+}
